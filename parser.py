@@ -2,14 +2,14 @@ import math
 import vtkmodules.all as vtk
 import numpy as np
 
-from common import convert_to_cartesian, convert_RT90_list_toWGS84
+from common import convert_to_cartesian, convert_RT90_list_toWGS84, EARTH_RADIUS
 
 # down_left, down_right, upper_left, upper_right
 MAP_LIMITS_RT90 = [(1349602, 7005969), (1371835, 7006362), (1371573, 7022967), (1349340, 7022573)]
 MAP_AREA_RT90 = [(1349602, 7005969), (1371835, 7006362), (1371573, 7022967), (1349340, 7022573)]
 ELEVATION_LIMITS_WGS84 = [(60, 10), (65, 15)]
 ELEVATION_DATA_DIMENSIONS = (6000, 6000)
-EARTH_RADIUS = 6371009
+
 
 
 def compute_quad_values(map_values):
