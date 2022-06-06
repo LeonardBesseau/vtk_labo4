@@ -1,11 +1,8 @@
-import numpy as np
-import vtkmodules.all as vtk
-from pyproj import Transformer
 import math
+import vtkmodules.all as vtk
+import numpy as np
 
-# https://epsg.org/crs_4326/WGS-84.html
-# https://epsg.org/crs_3021/RT90-2-5-gon-V.html
-RT90_TO_WGS84 = Transformer.from_crs(3021, 4326)
+from common import convert_to_cartesian, convert_RT90_list_toWGS84
 
 # down_left, down_right, upper_left, upper_right
 MAP_LIMITS_RT90 = [(1349602, 7005969), (1371835, 7006362), (1371573, 7022967), (1349340, 7022573)]
@@ -13,17 +10,6 @@ MAP_AREA_RT90 = [(1349602, 7005969), (1371835, 7006362), (1371573, 7022967), (13
 ELEVATION_LIMITS_WGS84 = [(60, 10), (65, 15)]
 ELEVATION_DATA_DIMENSIONS = (6000, 6000)
 EARTH_RADIUS = 6371009
-
-
-def convert_RT90_list_toWGS84(RT90_list):
-    return np.array([np.asarray(RT90_TO_WGS84.transform(x[1], x[0])) for x in RT90_list])
-
-
-def convert_to_cartesian(longitude, latitude, elevation):
-    transform = vtk.vtkTransform()
-    transform.RotateX(latitude)
-    transform.RotateY(longitude)
-    return transform.TransformPoint((0, 0, elevation))
 
 
 def compute_quad_values(map_values):
