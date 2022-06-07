@@ -12,14 +12,15 @@ if __name__ == '__main__':
     michel = get_map(ELEVATION_FILE, TEXTURE_FILE)
     glider = get_glider(GLIDER_FILE)
     renderer = vtk.vtkRenderer()
-    renderer.AddActor(michel)
-    #renderer.AddActor(glider)
     renderer.SetBackground(1, 1, 1)
+
+    renderer.AddActor(michel)
+    renderer.AddActor(glider)
 
     # Adds the renderer to the render window
     render_window = vtk.vtkRenderWindow()
     render_window.AddRenderer(renderer)
-    render_window.SetSize(800, 600)
+    render_window.SetSize(1200, 800)
 
     # Adds controls
     interactor = vtk.vtkRenderWindowInteractor()
@@ -29,5 +30,5 @@ if __name__ == '__main__':
     interactor.SetInteractorStyle(style)
 
     interactor.Initialize()
-    render_window.Render()
+    interactor.Render()
     interactor.Start()

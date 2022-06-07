@@ -15,8 +15,8 @@ def convert_RT90_list_toWGS84(RT90_list):
     return np.array([np.asarray(convert_RT90_toWGS84(*x)) for x in RT90_list])
 
 
-def convert_to_cartesian(longitude, latitude, elevation):
+def convert_to_cartesian(latitude, longitude, elevation):
     transform = vtk.vtkTransform()
-    transform.RotateX(latitude)
+    transform.RotateX(-latitude)
     transform.RotateY(longitude)
     return transform.TransformPoint((0, 0, elevation))
