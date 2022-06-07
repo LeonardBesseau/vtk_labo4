@@ -7,6 +7,7 @@ import vtkmodules.all as vtk
 RT90_TO_WGS84 = Transformer.from_crs(3021, 4326)
 EARTH_RADIUS = 6371009
 
+
 def convert_RT90_toWGS84(x, y):
     return RT90_TO_WGS84.transform(y, x)
 
