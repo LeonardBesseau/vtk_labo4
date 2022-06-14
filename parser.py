@@ -41,7 +41,7 @@ def quadInterpolation(x, y, a, b):
 
 
 def generate_clip_function(limits):
-    # I could not manage to intersect a quad with the grid, so we do it manually with 4 plane
+    # We could not manage to intersect a quad with the grid, so we do it manually with 4 plane
     clip_function = vtk.vtkImplicitBoolean()
     clip_function.SetOperationTypeToIntersection()
 

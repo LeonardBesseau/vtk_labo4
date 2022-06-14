@@ -3,6 +3,9 @@ import vtkmodules.all as vtk
 import numpy as np
 from common import convert_RT90_toWGS84, convert_to_cartesian, EARTH_RADIUS
 
+GLIDER_PATH_RADIUS = 30
+GLIDER_PATH_COLOR_RANGE = (-5, 5)
+
 
 def get_path(glider_data_file):
     data = pd.read_table(glider_data_file, header=None, skiprows=[0], usecols=[1, 2, 3],
@@ -23,6 +26,7 @@ def get_path(glider_data_file):
 def get_glider(glider_data_file):
     elevations, coordinates = get_path(glider_data_file)
 
+    # generate Path
     points = vtk.vtkPoints()
     elevations_points = vtk.vtkFloatArray()
 
@@ -38,12 +42,12 @@ def get_glider(glider_data_file):
     line_data.GetPointData().SetScalars(elevations_points)
 
     tube = vtk.vtkTubeFilter()
-    tube.SetRadius(30)
+    tube.SetRadius(GLIDER_PATH_RADIUS)
     tube.SetInputConnection(line.GetOutputPort())
 
     mapper = vtk.vtkPolyDataMapper()
     mapper.SetInputConnection(tube.GetOutputPort())
-    mapper.SetScalarRange((-5, 5))
+    mapper.SetScalarRange(GLIDER_PATH_COLOR_RANGE)
 
     output = vtk.vtkActor()
     output.SetMapper(mapper)

@@ -8,12 +8,6 @@ TEXTURE_FILE = "files/glider_map.jpg"
 ELEVATION_FILE = "files/EarthEnv-DEM90_N60E010.bil"
 GLIDER_FILE = "files/vtkgps.txt"
 
-
-def on_hover(widget, event_type):
-    print("Hello", widget, event_type)
-
-
-
 if __name__ == '__main__':
     michel = get_map(ELEVATION_FILE, TEXTURE_FILE)
     glider = get_glider(GLIDER_FILE)
@@ -32,11 +26,9 @@ if __name__ == '__main__':
     interactor = vtk.vtkRenderWindowInteractor()
     interactor.SetRenderWindow(render_window)
 
-    # style = vtk.vtkInteractorStyleTrackballCamera()
-    # interactor.SetInteractorStyle(style)
-
     style = MouseInteractorStyle(michel)
     style.SetDefaultRenderer(renderer)
+    style.lateInit()
     interactor.SetInteractorStyle(style)
 
     interactor.Initialize()
