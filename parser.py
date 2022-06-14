@@ -11,7 +11,6 @@ ELEVATION_LIMITS_WGS84 = [(60, 10), (65, 15)]
 ELEVATION_DATA_DIMENSIONS = (6000, 6000)
 
 
-
 def compute_quad_values(map_values):
     # Matrix used to compute the interpolation of a quadrilateral
     # https://www.particleincell.com/2012/quad-interpolation/

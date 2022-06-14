@@ -18,6 +18,6 @@ def convert_RT90_list_toWGS84(RT90_list):
 
 def convert_to_cartesian(latitude, longitude, elevation):
     transform = vtk.vtkTransform()
-    transform.RotateX(-latitude)
-    transform.RotateY(longitude)
+    transform.RotateX(longitude)
+    transform.RotateY(latitude)
     return transform.TransformPoint((0, 0, elevation))
